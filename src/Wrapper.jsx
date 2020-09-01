@@ -3,7 +3,7 @@ import React from 'react';
 function Wrapper({ children }) {
     const style = {
         border: '2px solid red',
-        padding: '16px'
+        padding: '10px'
     }
     return (
         <div style={style}>

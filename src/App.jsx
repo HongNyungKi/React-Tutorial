@@ -1,9 +1,10 @@
 import React from 'react';
-
-import InputSample from './InputSample';
+import Ref from './ref';
 
 function App() {
-  return <InputSample />
+  return (
+    <Ref />
+  )
 }
 
 export default App;
