@@ -2,8 +2,8 @@ import React from 'react';
 
 function Wrapper({ children }) {
     const style = {
-        border: '2px solid red',
-        padding: '10px'
+        background: 'black',
+        border: '1px solid green'
     }
     return (
         <div style={style}>
@@ -11,5 +11,4 @@ function Wrapper({ children }) {
         </div>
     )
 }
-
 export default Wrapper;
