@@ -4,6 +4,21 @@ import { useRef, useState } from 'react';
 import CreateUser from './createUser';
 
 function App() {
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      username: '홍녕기',
+      email: 'hnk2017@naver.com'
+    }, {
+      id: 2,
+      username: '양현준',
+      email: 'akakaka231@google.com'
+    }, {
+      id: 3,
+      username: '김철환',
+      email: 'kkcch9@naver.com'
+    }
+  ])
   const [inputs, setInputs] = useState({
     username: '',
     email: ''
@@ -15,45 +30,30 @@ function App() {
       [e.target.name]: e.target.value
     })
   }
-
-
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      username: '홍녕기',
-      email: 'hnk2017@naver.com'
-    }, {
-      id: 2,
-      username: '양현준',
-      email: 'akakak231@google.com'
-    }, {
-      id: 3,
-      username: '김철환',
-      email: 'kkcch9@naver.com'
-    }
-  ]
-  )
-  const nextId = useRef(4)
+  const nextId = useRef(4);
   const onCreate = () => {
     const user = {
       id: nextId.current,
       username,
       email
     }
-    setUsers([...users, user])
+    setUsers(users.concat(user))
     setInputs({
       username: '',
       email: ''
     })
+    console.log(nextId.current)//
     nextId.current += 1
   }
+
   return (
     <>
       <CreateUser
         username={username}
         email={email}
         onChange={onChange}
-        onCreate={onCreate} />
+        onCreate={onCreate}
+      />
       <UserList users={users} />
     </>
   )
