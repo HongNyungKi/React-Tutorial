@@ -3,7 +3,7 @@ import React from 'react';
 function User({ user }) {
     return (
         <div>
-            <b>{user.username}</b> <span>({user.email})</span>
+            <b>{user.username} <span>({user.email})</span></b>
         </div>
     )
 }
@@ -14,7 +14,7 @@ function UserList({ users }) {
         <div>
             {
                 users.map(
-                    (user, index) => (<User user={user} key={index} />)
+                    (user) => (<User user={user} key={user.id} />)
                 )
             }
         </div>
