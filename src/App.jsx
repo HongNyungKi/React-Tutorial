@@ -1,24 +1,29 @@
 import React from 'react';
 import UserList from './UserList';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import CreateUser from './createUser';
+import { useState } from 'react';
 
 function App() {
-  const [users, setUsers] = useState([
+  const [users, setUers] = useState([
     {
       id: 1,
       username: '홍녕기',
-      email: 'hnk2017@naver.com'
+      email: 'hnk2017@naver.com',
+      active: true
     }, {
       id: 2,
       username: '양현준',
-      email: 'akakaka231@google.com'
+      email: 'akakak231@google.com',
+      active: false
     }, {
       id: 3,
       username: '김철환',
-      email: 'kkcch9@naver.com'
+      email: 'kkcch9@naver.com',
+      active: false
     }
   ])
+  const nextId = useRef(4)
   const [inputs, setInputs] = useState({
     username: '',
     email: ''
@@ -30,22 +35,27 @@ function App() {
       [e.target.name]: e.target.value
     })
   }
-  const nextId = useRef(4);
   const onCreate = () => {
     const user = {
       id: nextId.current,
       username,
       email
     }
-    setUsers(users.concat(user))
+    setUers(users.concat(user))
     setInputs({
       username: '',
       email: ''
     })
-    console.log(nextId.current)//
     nextId.current += 1
   }
-
+  const onRemove = (id) => {
+    setUers(users.filter(user => user.id !== id))
+  }
+  const onToggle = (id) => {
+    setUers(users.map(
+      user => user.id === id ? { ...user, active: !user.active } : user
+    ))
+  }
   return (
     <>
       <CreateUser
@@ -54,9 +64,11 @@ function App() {
         onChange={onChange}
         onCreate={onCreate}
       />
-      <UserList users={users} />
+      <UserList
+        users={users}
+        onRemove={onRemove}
+        onToggle={onToggle} />
     </>
   )
 }
-
 export default App
