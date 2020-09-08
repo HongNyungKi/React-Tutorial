@@ -1,6 +1,12 @@
 import React from 'react';
+import { useEffect } from 'react';
 
 function User({ person, onRemove, onToggle }) {
+    // useEffect(
+    //     () => {
+    //         console.log(person)
+    //     }, [person]
+    // )
     const { username, email, id, active } = person;
     return (
         < div >
