@@ -4,7 +4,10 @@ import Counter from './counter';
 
 function App() {
   return (
-    <Counter />
+    <>
+      <Hello color='blue' isSpecial name='홍녕기' />
+      <Counter />
+    </>
   )
 }
 

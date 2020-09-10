@@ -10,16 +10,18 @@ import React, { Component } from 'react';
 
 class Hello extends Component {
     static defaultProps = {
+        color: 'green',
         name: '이름없음',
-        color: 'red'
+        isSpecial: false
     }
+
     render() {
         const { color, isSpecial, name } = this.props
         return (
             <div style={{ color }}>
-                {isSpecial && <span> @@ </span>}
-                안녕하세요 {name}씨.
-            </div>
+                {isSpecial && <span> ^_^ </span>}
+                {name} 씨 안녕하세요!
+            </div >
         )
     }
 }
