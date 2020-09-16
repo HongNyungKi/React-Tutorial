@@ -1,7 +1,44 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { darken, lighten } from 'polished';
 
+
+const sizes = {
+    large: {
+        height: '3rem',
+        fontSize: '1.25rem'
+    },
+    medium: {
+        height: '2.25rem',
+        fontSize: '1rem'
+    },
+    small: {
+        height: '1.75rem',
+        fontSize: '0.875rem'
+    }
+}
+
+const sizeStyles = css`
+    ${({ size }) => css`
+    height: ${sizes[size].height};
+    font-size:${sizes[size].fontSize};
+    `}
+    `
+const colorStyles = css`
+    ${({ theme, color }) => {
+        const selected = theme.pallete[color];
+        return css`
+        background:${selected};
+        &:hover{
+            background:${lighten(0.1, selected)}
+        }
+        &.active{
+            background:${darken(0.1, selected)}
+        }
+        `
+    }
+    }
+`
 const StyledButton = styled.button`
 /* 공통스타일 */
 outline:none;
@@ -9,34 +46,29 @@ border:none;
 border-radius:4px;
 color:white;
 font-weight:bold;
-cursor: pointer;
+cursor:pointer;
 padding-left:1rem;
 padding-right:1rem;
+&+&{
+    margin-left:1rem
+}
 
 /* 크기 */
-height:2.25rem;
-font-size:1rem;
+${sizeStyles}
 
 /* 색상 */
-background:${props => props.theme.pallete.blue};
-&:hover{
-    background:${props => lighten(0.1, props.theme.pallete.blue)};
-}
-&:active{
-    background:${props => darken(0.1, props.theme.pallete.blue)};
-}
-
-& +& {
-    margin-left: 1rem;
-}
+${colorStyles}
 `
 
-function Button({ children, ...rest }) {
+function Button({ children, color, size }) {
     return (
-        <>
-            <StyledButton {...rest}>{children}</StyledButton>
-        </>
+        <StyledButton color={color} size={size}>{children}</StyledButton>
     )
+}
+
+Button.defaultProps = {
+    color: 'blue',
+    size: 'medium'
 }
 
 export default Button;
